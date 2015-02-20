@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.bukkit.plugin.java.JavaPlugin"/>
+<fullyQualifiedTypeName name="org.bukkit.configuration.file.YamlConfiguration"/>
+<fullyQualifiedTypeName name="org.bukkit.entity.Player"/>
+<fullyQualifiedTypeName name="com.amazingthings.plugination.SettingsManager"/>
+</qualifiedTypeNameHistroy>

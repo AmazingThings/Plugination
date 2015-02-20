@@ -1,0 +1,21 @@
+package com.amazingthings.plugination;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Plugination extends JavaPlugin {
+
+	SettingsManager setting = SettingsManager.getInstance();
+	
+	public void onEnable() {
+		setting.setup(this);
+		setting.classes.set("test.class", "wizard");
+		setting.classes.set("test.level", "1");
+		setting.classes.set("test.expnext", "50");
+		setting.saveClasses();
+		
+	}
+	
+	public void onDisable() {
+		
+	}
+}

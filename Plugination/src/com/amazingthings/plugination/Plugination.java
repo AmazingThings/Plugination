@@ -1,5 +1,21 @@
 package com.amazingthings.plugination;
 
-public class Plugination {
+import org.bukkit.plugin.java.JavaPlugin;
 
+import com.amazingthings.plugination.commands.TestCommand;
+
+public class Plugination extends JavaPlugin {
+
+	SettingsManager setting = SettingsManager.getInstance();
+	
+	public void onEnable() {
+		setting.setup(this);
+
+		this.getCommand("test").setExecutor(new TestCommand());
+		
+	}
+	
+	public void onDisable() {
+		
+	}
 }

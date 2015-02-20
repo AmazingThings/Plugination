@@ -1,0 +1,36 @@
+package com.amazingthings.plugination.classes;
+
+public class Class {
+
+	public String className;
+	public int classId;
+	
+	public Class() {
+		loadClass();
+	}
+	
+	public String getClassName() {
+		
+		return this.className;
+	}
+	
+	public int getClassId() {
+		
+		return this.classId;
+	}
+	
+	public String setClassName(String name) {
+		
+		return name = this.className;
+	}
+	
+	public int setClassId(int id) {
+		
+		return id = this.classId;
+	}
+	
+	public void loadClass() {
+		this.setClassId(classId);
+		this.setClassName(className);
+	}
+}
