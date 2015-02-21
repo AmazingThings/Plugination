@@ -1,0 +1,5 @@
+package com.amazingthings.plugination.events;
+
+public class RemoveBacon {
+
+}

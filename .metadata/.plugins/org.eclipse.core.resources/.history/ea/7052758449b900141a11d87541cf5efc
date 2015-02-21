@@ -1,0 +1,5 @@
+package com.amazingthings.plugination.commands;
+
+public class RemoveBaconCommand {
+
+}

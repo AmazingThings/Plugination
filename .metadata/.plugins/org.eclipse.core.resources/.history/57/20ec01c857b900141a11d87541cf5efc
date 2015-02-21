@@ -1,0 +1,148 @@
+package com.amazingthings.plugination.events;
+
+import net.md_5.bungee.api.ChatColor;
+
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Bat;
+import org.bukkit.entity.Firework;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+public class SpawnBacon {
+
+	public static void spawnBase(int x, int y, int z, World w) {
+		Block b1 = w.getBlockAt(x-1, y-2, z-1);
+		Block b2 = w.getBlockAt(x, y-2, z-1);
+		Block b3 = w.getBlockAt(x+1, y-2, z-1);
+
+		Block b4 = w.getBlockAt(x-1, y-2, z);
+		Block b5 = w.getBlockAt(x, y-2, z);
+		Block b6 = w.getBlockAt(x+1, y-2, z);
+
+		Block b7 = w.getBlockAt(x-1, y-2, z+1);
+		Block b8 = w.getBlockAt(x, y-2, z+1);
+		Block b9 = w.getBlockAt(x+1, y-2, z+1);
+
+		Block bacon = w.getBlockAt(x, y-1, z);
+
+
+		/*Block bl1 = l.clone().subtract(x-1, y+1, z-1).getBlock();
+		Block bl2 = l.clone().subtract(x+0, y+1, z-1).getBlock();
+		Block bl3 = l.clone().subtract(x+1, y+1, z-1).getBlock();
+
+		Block bl4 = l.clone().subtract(x-1, y+1, z+0).getBlock();
+		Block bl5 = l.clone().subtract(x+0, y+1, z+0).getBlock();
+		Block bl6 = l.clone().subtract(x+1, y+1, z+0).getBlock();
+
+		Block bl7 = l.clone().subtract(x-1, y+1, z+1).getBlock();
+		Block bl8 = l.clone().subtract(x+0, y+1, z+1).getBlock();
+		Block bl9 = l.clone().subtract(x+1, y+1, z+1).getBlock();
+		Block bacon = l.clone().subtract(x+0, z+0, z+0).getBlock();*/
+
+		b1.setType(Material.IRON_BLOCK);
+		b2.setType(Material.IRON_BLOCK);
+		b3.setType(Material.IRON_BLOCK);
+		b4.setType(Material.IRON_BLOCK);
+		b5.setType(Material.IRON_BLOCK);
+		b6.setType(Material.IRON_BLOCK);
+		b7.setType(Material.IRON_BLOCK);
+		b8.setType(Material.IRON_BLOCK);
+		b9.setType(Material.IRON_BLOCK);
+		bacon.setType(Material.BEACON);
+
+		Location loc = w.getBlockAt(x, y-2, z).getLocation();
+		Location sloc = w.getBlockAt(x, y+60, z).getLocation();
+
+		Bat b = (Bat) w.spawn(loc, Bat.class);
+		
+		Firework f = (Firework) w.spawn(loc, Firework.class);
+
+		FireworkMeta fm = f.getFireworkMeta();
+
+		b.setPassenger(f);
+		b.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 180, 180));
+		fm.setPower(0);
+		fm.addEffect(FireworkEffect.builder()
+				.flicker(false)
+				.trail(true)
+				.with(Type.BALL_LARGE)
+				.withColor(Color.GREEN)
+				.withFade(Color.LIME)
+				.build());
+		
+		
+		f.setFireworkMeta(fm);
+
+		
+		b.setHealth(0);
+		Bukkit.getServer().broadcastMessage("");
+		Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "POWERUP SPAWNING...");
+		Bukkit.getServer().broadcastMessage("");
+		
+		loc.getWorld().playSound(loc, Sound.ENDERMAN_TELEPORT, 100, 100);
+		
+		Bat s = (Bat) w.spawn(sloc,Bat.class);
+		s.setHealth(1);
+		s.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100000, 100000));
+
+	}
+
+	public static void removeBacon(int x, int y, int z, World w) {
+		Block b1 = w.getBlockAt(x-1, y-2, z-1);
+		Block b2 = w.getBlockAt(x, y-2, z-1);
+		Block b3 = w.getBlockAt(x+1, y-2, z-1);
+
+		Block b4 = w.getBlockAt(x-1, y-2, z);
+		Block b5 = w.getBlockAt(x, y-2, z);
+		Block b6 = w.getBlockAt(x+1, y-2, z);
+
+		Block b7 = w.getBlockAt(x-1, y-2, z+1);
+		Block b8 = w.getBlockAt(x, y-2, z+1);
+		Block b9 = w.getBlockAt(x+1, y-2, z+1);
+
+		Block bacon = w.getBlockAt(x, y-1, z);
+
+		b1.setType(Material.AIR);
+		b2.setType(Material.AIR);
+		b3.setType(Material.AIR);
+		b4.setType(Material.AIR);
+		b5.setType(Material.AIR);
+		b6.setType(Material.AIR);
+		b7.setType(Material.AIR);
+		b8.setType(Material.AIR);
+		b9.setType(Material.AIR);
+		bacon.setType(Material.AIR);
+
+		Location loc = w.getBlockAt(x, y-2, z).getLocation();
+
+		Bat b = (Bat) w.spawn(loc, Bat.class);
+		
+		Firework f = (Firework) w.spawn(loc, Firework.class);
+
+		FireworkMeta fm = f.getFireworkMeta();
+
+		b.setPassenger(f);
+		b.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 180, 180));
+		fm.setPower(0);
+		fm.addEffect(FireworkEffect.builder()
+				.flicker(false)
+				.trail(true)
+				.with(Type.BALL_LARGE)
+				.withColor(Color.RED)
+				.withFade(Color.MAROON)
+				.build());
+		
+		f.setFireworkMeta(fm);
+		
+		b.setHealth(0);
+	}
+}

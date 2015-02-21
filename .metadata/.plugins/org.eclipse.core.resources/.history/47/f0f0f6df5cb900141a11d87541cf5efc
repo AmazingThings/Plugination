@@ -1,0 +1,104 @@
+package com.amazingthings.plugination;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.md_5.bungee.api.ChatColor;
+import net.minecraft.server.v1_8_R1.Blocks;
+import net.minecraft.server.v1_8_R1.EntityItem;
+import net.minecraft.server.v1_8_R1.Items;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.FireworkEffect.Type;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Bat;
+import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.EnderCrystal;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import com.avaje.ebeaninternal.server.deploy.BeanDescriptor.EntityType;
+
+public class SnowballBoom implements Runnable {
+	
+	SettingsManager setting = SettingsManager.getInstance();
+
+	public List<Entity> getNearbySnow(Location loc, int s) {
+		List<Entity> entities = new ArrayList<Entity>();
+		
+		for(Entity e : loc.getWorld().getEntitiesByClass(Bat.class))
+			if(loc.distance(e.getLocation()) <= s)
+				entities.add(e);
+
+		return entities;
+			
+	}
+	
+	@Override
+	public void run() {
+
+		for(Entity e : getNearbySnow(new Location(
+				Bukkit.getWorld("world"),
+				setting.getClasses().getInt("location.bacon.x"),
+				setting.getClasses().getInt("location.bacon.y"), 
+				setting.getClasses().getInt("location.bacon.z")),
+				300)) {
+			
+			e.getWorld().spawn(e.getLocation(), Firework.class);
+			
+			e.teleport(new Location(e.getWorld(),
+					setting.getClasses().getInt("location.bacon.x"),
+					e.getLocation().getY()-8,
+					setting.getClasses().getInt("location.bacon.z")));
+			
+			Firework f = (Firework) e.getLocation().getWorld().spawn(e.getLocation(), Firework.class);
+
+			FireworkMeta fm = f.getFireworkMeta();
+
+			fm.setPower(0);
+			fm.addEffect(FireworkEffect.builder()
+					.flicker(false)
+					.trail(true)
+					.with(Type.BURST)
+					.withColor(Color.BLUE)
+					.build());
+			
+			f.setFireworkMeta(fm);
+			
+			if(e.getLocation().getY() <= setting.getClasses().getInt("location.bacon.y")
+					
+					/*e.getWorld().getBlockAt(e.getLocation(new Location(e.getWorld(),
+					e.getLocation().getX(),
+					e.getLocation().getY()-1,
+					e.getLocation().getZ())))
+					== Blocks.BEACON*/
+					) {
+				Bat be = (Bat) e;
+				Bukkit.getServer().broadcastMessage(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "" +ChatColor.STRIKETHROUGH + "--------------------------------------------");
+				Bukkit.getServer().broadcastMessage("");
+				Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "A POWERUP SPAWNED!");
+				Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + "Collect it for a powerful attack.");
+				Bukkit.getServer().broadcastMessage("");
+				Bukkit.getServer().broadcastMessage(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "" +ChatColor.STRIKETHROUGH + "--------------------------------------------");
+				be.setHealth(0);
+				
+				Location loc = e.getLocation(new Location(e.getWorld(),
+						setting.getClasses().getInt("location.bacon.x"),
+						setting.getClasses().getInt("location.bacon.y"),
+						setting.getClasses().getInt("location.bacon.z")));
+				
+				EnderCrystal ec = loc.getWorld().spawn(loc, EnderCrystal.class);
+				ec.setCustomName(ChatColor.YELLOW + "" + ChatColor.BOLD + "AMAZING AXE");
+			}
+		}
+	}
+}

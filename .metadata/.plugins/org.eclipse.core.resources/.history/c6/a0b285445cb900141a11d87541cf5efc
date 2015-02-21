@@ -1,0 +1,5 @@
+package com.amazingthings.plugination.listeners;
+
+public class EntityHitEntity {
+
+}

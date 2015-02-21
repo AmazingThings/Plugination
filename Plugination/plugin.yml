@@ -4,9 +4,9 @@ main: com.amazingthings.plugination.Plugination
 description: Plug the Nation ._.
  
 commands:
-    creload:
-        usage: /<command>
-        description: Reloads all configuration and data files.
+    bacon:
+        description: BAAAACON.
     test:
-        usage: /<command>
         description: Do stuff.
+    removebacon:
+        description: Remove BAAAACON :3.

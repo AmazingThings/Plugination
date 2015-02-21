@@ -9,14 +9,15 @@ import com.amazingthings.plugination.SettingsManager;
 
 public class TestCommand implements CommandExecutor {
 
+	SettingsManager setting = SettingsManager.getInstance();
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command c, String arg2,
 			String[] args) {
 
 		if(c.getName().equalsIgnoreCase("test")) {
 			if(!(sender instanceof Player)) {
-				sender.sendMessage("._.");
-				sender.sendMessage("Test is a" + SettingsManager.getInstance().getClasses().get("test", "class"));
+				sender.sendMessage("Test is da " + setting.getClasses().get("test.class").toString());
 			}else {
 				sender.sendMessage("You must be da console to do dis.");
 			}

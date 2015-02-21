@@ -1,0 +1,62 @@
+package com.amazingthings.plugination;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.Location;
+import org.bukkit.FireworkEffect.Type;
+import org.bukkit.entity.Chicken;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Snowball;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+public class SnowballBoom implements Runnable {
+	
+	SettingsManager setting = SettingsManager.getInstance();
+
+	public List<Entity> getNearbySnow(Location loc, int s) {
+		List<Entity> entities = new ArrayList<Entity>();
+		
+		for(Entity e : loc.getWorld().getEntitiesByClass(Chicken.class))
+			if(loc.distance(e.getLocation()) <= s)
+				entities.add(e);
+
+		return entities;
+			
+	}
+	
+	@Override
+	public void run() {
+
+		for(Entity e : getNearbySnow(new Location(
+				Bukkit.getWorld("world"),
+				setting.getClasses().getInt("location.x"),
+				setting.getClasses().getInt("location.y"), 
+				setting.getClasses().getInt("location.z")),
+				300)) {
+			e.getWorld().spawn(e.getLocation(), Firework.class);
+			
+			Firework f = (Firework) e.getLocation().getWorld().spawn(e.getLocation(), Firework.class);
+
+			FireworkMeta fm = f.getFireworkMeta();
+
+			fm.setPower(0);
+			fm.addEffect(FireworkEffect.builder()
+					.flicker(false)
+					.trail(true)
+					.with(Type.BURST)
+					.withColor(Color.BLUE)
+					.build());
+			
+			f.setFireworkMeta(fm);
+			
+			
+		}
+	}
+}

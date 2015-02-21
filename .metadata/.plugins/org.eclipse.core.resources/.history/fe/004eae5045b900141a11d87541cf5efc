@@ -1,0 +1,30 @@
+package com.amazingthings.plugination.events;
+
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+
+public class SpawnBacon {
+
+	public static void spawnBase(Location l) {
+		Block b1 = l.clone().subtract(-1, -1, -1).getBlock();
+		Block b2 = l.clone().subtract(0, -1, -1).getBlock();
+		Block b3 = l.clone().subtract(1, -1, -1).getBlock();
+		Block b4 = l.clone().subtract(-1, -1, 0).getBlock();
+		Block b5 = l.clone().subtract(0, -1, 0).getBlock();
+		Block b6 = l.clone().subtract(1, -1, 0).getBlock();
+		Block b7 = l.clone().subtract(-1, -1, 1).getBlock();
+		Block b8 = l.clone().subtract(0, -1, 1).getBlock();
+		Block b9 = l.clone().subtract(1, -1, 1).getBlock();
+		
+		b1.setType(Material.IRON_BLOCK);
+		b2.setType(Material.IRON_BLOCK);
+		b3.setType(Material.IRON_BLOCK);
+		b4.setType(Material.IRON_BLOCK);
+		b5.setType(Material.IRON_BLOCK);
+		b6.setType(Material.IRON_BLOCK);
+		b7.setType(Material.IRON_BLOCK);
+		b8.setType(Material.IRON_BLOCK);
+		b9.setType(Material.IRON_BLOCK);
+	}
+}
