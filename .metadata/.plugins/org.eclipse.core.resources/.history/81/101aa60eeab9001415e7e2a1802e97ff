@@ -46,7 +46,7 @@ public class SnowballBoom implements Runnable {
 			
 			e.teleport(new Location(e.getWorld(),
 					setting.getClasses().getInt("location.bacon.x") + 1,
-					e.getLocation().getY()-4,
+					e.getLocation().getY()-16,
 					setting.getClasses().getInt("location.bacon.z") + 1));
 			
 			Firework f = (Firework) e.getLocation().getWorld().spawn(e.getLocation(), Firework.class);

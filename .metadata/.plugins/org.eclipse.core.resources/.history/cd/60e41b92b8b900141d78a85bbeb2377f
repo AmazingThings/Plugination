@@ -45,9 +45,9 @@ public class SnowballBoom implements Runnable {
 			e.getWorld().spawn(e.getLocation(), Firework.class);
 			
 			e.teleport(new Location(e.getWorld(),
-					setting.getClasses().getInt("location.bacon.x") + 1,
-					e.getLocation().getY()-4,
-					setting.getClasses().getInt("location.bacon.z") + 1));
+					setting.getClasses().getInt("location.bacon.x"),
+					e.getLocation().getY()-2,
+					setting.getClasses().getInt("location.bacon.z")));
 			
 			Firework f = (Firework) e.getLocation().getWorld().spawn(e.getLocation(), Firework.class);
 
@@ -85,9 +85,9 @@ public class SnowballBoom implements Runnable {
 				int z = setting.getClasses().getInt("location.bacon.z");
 				
 				Location loc = new Location(e.getWorld(),
-						x + 0.5,
-						y  ,
-						z + 0.5);
+						x+0.5,
+						y,
+						z+0.5);
 				
 				EnderCrystal ec = loc.getWorld().spawn(loc, EnderCrystal.class);
 				ec.setCustomName(ChatColor.YELLOW + "" + ChatColor.BOLD + "AMAZING AXE");
